@@ -412,6 +412,8 @@ async function handleFilesIngested(files) {
 }
 
 async function enrichWithBackendDiagnosis(files) {
+  const recoveryButton = document.getElementById('btn-start-repair');
+  if (recoveryButton) recoveryButton.disabled = true;
   const attachDiagnoses = (items) => {
     items.forEach(diagnosis => {
       const item = analyzedItems.find(candidate => candidate.file_name === diagnosis.file_name);
@@ -432,6 +434,7 @@ async function enrichWithBackendDiagnosis(files) {
     renderDiagnosticsList();
     backendAnalysisComplete = data.items?.length === files.length;
     if (backendAnalysisComplete) {
+      if (recoveryButton) recoveryButton.disabled = false;
       showToast('Pre-recovery evidence analysis complete. Review fragments before starting recovery.', 'success');
     } else {
       showToast(`Backend analyzed ${data.items?.length || 0}/${files.length} file(s); recovery is waiting for complete analysis.`, 'warning');
@@ -457,6 +460,7 @@ async function enrichWithBackendDiagnosis(files) {
       attachDiagnoses(individualDiagnoses);
       renderDiagnosticsList();
       backendAnalysisComplete = individualDiagnoses.length === files.length;
+      if (backendAnalysisComplete && recoveryButton) recoveryButton.disabled = false;
       showToast(`Evidence analysis completed for ${individualDiagnoses.length}/${files.length} file(s).${backendAnalysisComplete ? '' : ' Recovery is waiting for the remaining analysis.'}`, 'warning');
     } else {
       backendAnalysisComplete = false;
