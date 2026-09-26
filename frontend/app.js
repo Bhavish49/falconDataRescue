@@ -876,12 +876,15 @@ function initRecoveryHandler() {
         body: formData
       });
       if (!queued.ok) {
-        let detail = '';
+        // A Response body can only be consumed once. Read it as text first,
+        // then parse JSON when the backend returned a structured error.
+        const rawError = await queued.text();
+        let detail = rawError;
         try {
-          const errorBody = await queued.json();
-          detail = errorBody.detail || errorBody.error || '';
+          const errorBody = JSON.parse(rawError);
+          detail = errorBody.detail || errorBody.error || rawError;
         } catch (_) {
-          detail = await queued.text();
+          // Keep the plain-text response as the error detail.
         }
         throw new Error(`Recovery request failed (${queued.status})${detail ? `: ${detail}` : ''}`);
       }
