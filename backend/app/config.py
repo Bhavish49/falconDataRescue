@@ -23,8 +23,9 @@ class Settings(BaseSettings):
     # ── App ──────────────────────────────────────────────────────────────
     app_name: str = "FalconDataRescue Forensic Recovery"
     app_env: str = "development"
-    debug: bool = True
-    secret_key: str = "change-me"
+    debug: bool = False
+    secret_key: str = ""
+    cors_origins: str = "http://127.0.0.1:8010,http://localhost:8010"
 
     # ── Database ─────────────────────────────────────────────────────────
     # SQLite keeps a fresh checkout runnable without requiring a local
@@ -39,7 +40,7 @@ class Settings(BaseSettings):
     # ── Storage ──────────────────────────────────────────────────────────
     evidence_mount_path: str = "/evidence"
     recovery_output_path: str = "/output"
-    max_upload_size_mb: int = 10240
+    max_upload_size_mb: int = 512
 
     # ── ML ───────────────────────────────────────────────────────────────
     ml_model_path: str = "/models"
@@ -61,6 +62,10 @@ class Settings(BaseSettings):
     @property
     def is_production(self) -> bool:
         return self.app_env == "production"
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
 
     @property
     def evidence_path(self) -> Path:

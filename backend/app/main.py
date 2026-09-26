@@ -23,17 +23,26 @@ logger = structlog.get_logger()
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """Application startup / shutdown hooks."""
     settings = get_settings()
+    if settings.is_production:
+        if not settings.secret_key or settings.secret_key == "change-me":
+            raise RuntimeError("SECRET_KEY must be set to a strong value in production")
+        if settings.debug:
+            raise RuntimeError("DEBUG must be false in production")
+        if "*" in settings.cors_origin_list:
+            raise RuntimeError("CORS_ORIGINS must not contain '*' in production")
     logger.info(
         "mce.startup",
         app_name=settings.app_name,
         environment=settings.app_env,
         debug=settings.debug,
     )
-    # There are no checked-in Alembic revisions yet. Create the local
-    # development schema automatically; production should use migrations.
-    if not settings.is_production and settings.database_url.startswith("sqlite"):
-        async with engine.begin() as connection:
-            await connection.run_sync(Base.metadata.create_all)
+    # The repository does not yet contain an Alembic revision. Create the
+    # schema at startup so a fresh single-instance deployment is usable.
+    # Replace this bootstrap with `alembic upgrade head` once migrations are
+    # introduced; startup schema creation is not suitable for multi-instance
+    # zero-downtime migrations.
+    async with engine.begin() as connection:
+        await connection.run_sync(Base.metadata.create_all)
     yield
     logger.info("mce.shutdown")
 
@@ -50,16 +59,15 @@ def create_app() -> FastAPI:
             "and uses ML to reassemble deleted files."
         ),
         version="0.1.0",
-        docs_url="/api/docs",
-        redoc_url="/api/redoc",
-        openapi_url="/api/openapi.json",
+        docs_url=None if settings.is_production else "/api/docs",
+        redoc_url=None if settings.is_production else "/api/redoc",
+        openapi_url=None if settings.is_production else "/api/openapi.json",
         lifespan=lifespan,
     )
 
-    # CORS — allow all origins in dev, lock down in production
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=settings.cors_origin_list,
         allow_credentials=False,
         allow_methods=["*"],
         allow_headers=["*"],

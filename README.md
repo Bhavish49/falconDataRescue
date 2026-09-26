@@ -256,12 +256,16 @@ resident records and asserts exact payload reassembly.
 ## Configuration
 
 Settings load from environment variables / `backend/.env` (see `.env.example`).
+For production, copy `.env.example` to `.env`, set a strong `SECRET_KEY`, set
+`APP_ENV=production`, keep `DEBUG=false`, and replace `CORS_ORIGINS` with the
+exact frontend origin(s).
 Notable values:
 
 | Variable | Default | Meaning |
 | --- | --- | --- |
 | `DATABASE_URL` | `sqlite+aiosqlite:///./mce_forensics.db` | Async DB URL |
-| `MAX_UPLOAD_SIZE_MB` | `10240` | Upload size cap |
+| `MAX_UPLOAD_SIZE_MB` | `512` | Upload size cap |
+| `CORS_ORIGINS` | localhost origins | Comma-separated allowed browser origins |
 | `AI_VISUAL_ENABLED` | `true` | Enable optional visual-similarity stage |
 | `AI_ALLOW_MODEL_DOWNLOAD` | `false` | Permit downloading model weights |
 | `HUGGINGFACE_API_KEY` / `OPENAI_API_KEY` | *(empty)* | Enable AI-assisted review |
@@ -278,6 +282,24 @@ The app runs fully offline with SQLite and heuristic analysis when no keys are p
   `PARTIAL_RECOVERY`, `ORIGINAL_VALID`, or `FAILED_RECOVERY` with an explicit confidence
   score and warnings when the original byte stream was not fully proven intact.
 - Live-drive access requires Administrator and is gated behind an explicit user action.
+
+## Container deployment
+
+The container deployment is intended for uploaded files and disk images. It does
+not provide direct access to a host's live Windows drives; use the native
+Administrator launcher for `/api/deleted/scan-drive`.
+
+```bash
+copy .env.example .env
+# edit .env: SECRET_KEY, CORS_ORIGINS, database/storage settings
+docker compose -f docker-compose.production.yml up --build -d
+```
+
+The production container listens on port `8010`. Configure TLS and authentication
+at the hosting platform or reverse proxy before exposing it publicly. Recovery
+jobs and in-memory download indexes are process-local in this release, so use a
+single application replica and plan a persistent job/artifact backend before
+horizontal scaling.
 
 ---
 
