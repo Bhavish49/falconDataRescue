@@ -185,11 +185,38 @@ python -m uvicorn app.main:app --host 127.0.0.1 --port 8010
 
 ### Command-line recovery
 
+Run these commands from the repository root. On Windows, use `py` instead of
+`python` if that is how Python is installed.
+
 ```bash
-python recover_file.py <path_to_corrupted_file_or_folder> [output_dir]
+# Create and activate a virtual environment (recommended)
+python -m venv .venv
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+# Linux/macOS
+source .venv/bin/activate
+
+# Install the backend dependencies
+python -m pip install -r backend/requirements.txt
+
+# Recover one damaged file into recovered_output/
+python recover_file.py path/to/damaged_file.pdf
+
+# Recover every file directly inside a folder into a custom output folder
+python recover_file.py path/to/damaged_files recovered_output
 ```
 
-Writes restored payloads plus a JSON recovery report and extracted-content Markdown.
+For example, on Windows:
+
+```powershell
+python recover_file.py "C:\Users\You\Desktop\damaged.jpg" "C:\Users\You\Desktop\recovered"
+```
+
+The CLI writes a `restored_<filename>` payload when validation succeeds, plus a
+`*_recovery_report.json` report and, when text was extracted, a
+`*_recovered_content.md` file. A `FAILED_RECOVERY` result does not create a
+downloadable payload. The CLI handles uploaded/corrupted files and folders; use
+the web UI or `/api/deleted/scan-drive` for deleted files on a live NTFS drive.
 
 ---
 
