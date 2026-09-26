@@ -1,6 +1,6 @@
-# falconDataRescue — AI Data Recovery & Forensic Reconstruction Studio
+# FalconDataRescue — AI Data Recovery & Forensic Reconstruction Studio
 
-falconDataRescue is a forensic data-recovery platform that identifies, reconstructs, classifies, and
+FalconDataRescue is a forensic data-recovery platform that identifies, reconstructs, classifies, and
 prioritizes recoverable information from damaged, deleted, or partially corrupted storage.
 It pairs a deterministic recovery engine with an evidence-first investigator UI: every result
 carries a validation score, and nothing is ever "recovered" that cannot be proven from the

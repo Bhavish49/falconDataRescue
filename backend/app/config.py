@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     )
 
     # ── App ──────────────────────────────────────────────────────────────
-    app_name: str = "falconDataRescue Forensic Recovery"
+    app_name: str = "FalconDataRescue Forensic Recovery"
     app_env: str = "development"
     debug: bool = True
     secret_key: str = "change-me"

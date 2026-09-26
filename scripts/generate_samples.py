@@ -91,7 +91,7 @@ manifest = {
     "invalid_jpeg_bytes.jpg": "Invalid JPEG bytes; must be rejected",
 }
 (out_dir / "README.txt").write_text(
-    "Controlled falconDataRescue image-recovery fixtures\n\n"
+    "Controlled FalconDataRescue image-recovery fixtures\n\n"
     + "\n".join(f"{name}: {description}" for name, description in manifest.items())
     + "\n\nUpload several files together to test batch behavior.\n",
     encoding="utf-8",

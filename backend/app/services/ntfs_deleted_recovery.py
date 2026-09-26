@@ -90,7 +90,7 @@ class Volume:
             fh = open(path, "rb")
         except PermissionError as exc:
             raise PermissionError(
-                f"Raw access to {letter.upper()}: was denied. Run the falconDataRescue server "
+                f"Raw access to {letter.upper()}: was denied. Run the FalconDataRescue server "
                 "(start_server.bat) as Administrator to scan live drives for "
                 "deleted files."
             ) from exc
@@ -220,6 +220,15 @@ def scan_drive_for_deleted(letter: str, max_items: int = MAX_ITEMS) -> dict:
         volume.fh.close()
 
 
+def scan_ntfs_image_bytes(image_bytes: bytes, source_label: str, max_items: int = MAX_ITEMS) -> dict:
+    """Recover deleted NTFS records from an uploaded raw image."""
+    volume = Volume(io.BytesIO(image_bytes))
+    result = _scan_volume(volume, min(max_items, MAX_ITEMS), source_label)
+    result["image_name"] = source_label
+    result["image_size"] = len(image_bytes)
+    return result
+
+
 def _scan_volume(volume: Volume, max_items: int, source_label: str) -> dict:
     geo = volume.parse_geometry()
     cluster = geo["cluster_size"]
@@ -331,6 +340,7 @@ def _scan_volume(volume: Volume, max_items: int, source_label: str) -> dict:
         "total_recovered": len(items),
         "bundle_id": bundle_id,
         "items": items,
+        "raw_items_map": raw_map,
     }
 
 

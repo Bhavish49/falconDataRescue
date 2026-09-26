@@ -7,7 +7,7 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-title falconDataRescue Recovery Server (Administrator)
+title FalconDataRescue Recovery Server (Administrator)
 cd /d c:\MCE\backend
 echo Backend server starting at http://127.0.0.1:8010  [Administrator]
 echo Open that address to use the recovery UI.

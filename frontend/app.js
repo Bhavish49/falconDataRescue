@@ -712,16 +712,29 @@ async function handleDiskImageIngested(file) {
 
 async function loadDriveList() {
   const sel = document.getElementById('drive-select');
+  const scanButton = sel?.parentElement?.querySelector('button');
+  if (!sel) return;
+  sel.disabled = true;
+  if (scanButton) scanButton.disabled = true;
+  sel.innerHTML = '<option value="">Detecting drives...</option>';
   try {
     const res = await fetch(`${API_BASE_URL}/api/deleted/drives`);
     if (!res.ok) throw new Error(`Drive enumeration failed (${res.status})`);
     const data = await res.json();
-    sel.innerHTML = (data.drives || [])
+    const drives = data.drives || [];
+    sel.innerHTML = drives.length
+      ? drives
       .map(d => `<option value="${escapeHtml(d.letter)}">${escapeHtml(d.letter)}: — ${escapeHtml(d.kind)} drive</option>`)
-      .join('');
+      .join('')
+      : '<option value="">No NTFS-compatible drives detected</option>';
+    if (drives.length) {
+      sel.value = drives[0].letter;
+      sel.disabled = false;
+      if (scanButton) scanButton.disabled = false;
+    }
   } catch (e) {
     console.error(e);
-    sel.innerHTML = '<option value="">No drives detected</option>';
+    sel.innerHTML = '<option value="">Unable to enumerate drives</option>';
   }
 }
 

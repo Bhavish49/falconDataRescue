@@ -1,5 +1,5 @@
 """
-falconDataRescue Forensic Data Recovery CLI Tool
+FalconDataRescue Forensic Data Recovery CLI Tool
 Usage:
     python recover_file.py <path_to_corrupted_file_or_folder> [output_dir]
 """
