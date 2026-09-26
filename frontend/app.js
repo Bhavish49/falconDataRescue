@@ -19,6 +19,7 @@ const API_BASE_URL = configuredApiBase || (localHost && window.location.port !==
 
 let uploadedFiles = [];
 let analyzedItems = [];
+let backendAnalysisComplete = false;
 let currentInspectedIndex = 0;
 let currentMode = 'files';
 
@@ -229,6 +230,7 @@ function initFileInputs() {
 function clearUploadQueue() {
   uploadedFiles = [];
   analyzedItems = [];
+  backendAnalysisComplete = false;
   document.getElementById('workspace-section').style.display = 'none';
   document.getElementById('restored-section').style.display = 'none';
   showToast('Cleared workspace queue.', 'info');
@@ -373,6 +375,7 @@ async function handleFilesIngested(files) {
   document.getElementById('restored-section').style.display = 'none';
 
   analyzedItems = [];
+  backendAnalysisComplete = false;
   for (let i = 0; i < selectedFiles.length; i++) {
     const file = selectedFiles[i];
     const buffer = await file.arrayBuffer();
@@ -427,7 +430,12 @@ async function enrichWithBackendDiagnosis(files) {
     const data = await response.json();
     attachDiagnoses(data.items);
     renderDiagnosticsList();
-    showToast('Pre-recovery evidence analysis complete. Review fragments before starting recovery.', 'success');
+    backendAnalysisComplete = data.items?.length === files.length;
+    if (backendAnalysisComplete) {
+      showToast('Pre-recovery evidence analysis complete. Review fragments before starting recovery.', 'success');
+    } else {
+      showToast(`Backend analyzed ${data.items?.length || 0}/${files.length} file(s); recovery is waiting for complete analysis.`, 'warning');
+    }
   } catch (error) {
     // A single large or unusual file should not hide diagnosis for every other file.
     const individualDiagnoses = [];
@@ -448,8 +456,10 @@ async function enrichWithBackendDiagnosis(files) {
     if (individualDiagnoses.length > 0) {
       attachDiagnoses(individualDiagnoses);
       renderDiagnosticsList();
-      showToast(`Evidence analysis completed for ${individualDiagnoses.length}/${files.length} file(s).`, 'warning');
+      backendAnalysisComplete = individualDiagnoses.length === files.length;
+      showToast(`Evidence analysis completed for ${individualDiagnoses.length}/${files.length} file(s).${backendAnalysisComplete ? '' : ' Recovery is waiting for the remaining analysis.'}`, 'warning');
     } else {
+      backendAnalysisComplete = false;
       console.warn('Backend pre-analysis unavailable; showing local analysis only.', error);
       showToast('Backend pre-analysis unavailable; per-file local evidence analysis is shown.', 'warning');
     }
@@ -856,6 +866,10 @@ function initRecoveryHandler() {
   btn.addEventListener('click', async () => {
     if (analyzedItems.length === 0) {
       showToast('Please upload corrupted files first.', 'warning');
+      return;
+    }
+    if (!backendAnalysisComplete) {
+      showToast('Complete backend pre-analysis before starting recovery.', 'warning');
       return;
     }
 
