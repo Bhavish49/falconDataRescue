@@ -1,0 +1,50 @@
+# Core
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-multipart==0.0.12
+
+# Database
+sqlalchemy[asyncio]==2.0.35
+aiosqlite==0.22.1
+asyncpg==0.29.0
+alembic==1.13.3
+psycopg2-binary==2.9.9
+
+# Redis
+redis==5.1.1
+celery==5.4.0
+
+# ML / AI
+scikit-learn==1.5.2
+numpy==1.26.4
+scipy==1.14.1
+sentence-transformers==3.1.1
+networkx==3.4.1
+# Optional local visual similarity stage. Model weights are downloaded only
+# when AI_ALLOW_MODEL_DOWNLOAD=true and are never used to invent file bytes.
+transformers>=4.46.0,<6.0.0
+torch>=2.2.0,<3.0.0
+
+# LLM
+openai==1.51.0
+tiktoken==0.8.0
+
+# Forensics
+pytsk3==20231001
+# python-magic==0.4.27  # optional, OS-dependent
+
+# Reports
+reportlab==4.2.4
+Pillow==11.3.0
+jinja2==3.1.4
+
+# Utilities
+python-dotenv==1.0.1
+httpx==0.27.2
+structlog==24.4.0
+orjson==3.10.7
+aiofiles==24.1.0
+python-dateutil==2.9.0
+uuid6==2024.7.10

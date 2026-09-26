@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Secrets & local config
+.env
+*.env
+!.env.example
+
+# Runtime databases & artifacts
+*.db
+*.sqlite
+*.sqlite3
+backend/mce_forensics.db
+
+# Logs
+*.log
+
+#Recovered output / scratch
+recovered_output/
+cli_output_*/
+_server*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

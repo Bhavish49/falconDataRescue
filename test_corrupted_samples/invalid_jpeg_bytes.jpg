@@ -1,0 +1,2 @@
+NOT_A_REAL_JPEG_FILE
+This fixture must be rejected by the image decoder.

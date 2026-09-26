@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>falconDataRescue AI Data Recovery & Forensic Reconstruction Studio</title>
+  <meta name="description"
+    content="AI-assisted data recovery platform to identify, reconstruct, classify, and prioritize recoverable digital information from damaged, deleted, or partially corrupted storage data.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f2fe'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+</head>
+
+<body class="landing-active">
+
+  <!-- Public landing screen. The forensic workspace opens after Recover Now. -->
+  <section class="landing-page" id="landing-page">
+    <div class="reference-landing" aria-label="falconDataRescue Recover landing page">
+      <div class="reference-landing-wrapper">
+        <img src="accets/landing-green.jpeg" alt="Recover files from corrupted data" class="reference-landing-image">
+        <nav class="reference-nav-overlay" aria-label="Landing navigation">
+          <a href="#landing-page" data-nav="home">Home</a>
+          <a href="#lp-about" data-nav="about">About</a>
+          <a href="#lp-features" data-nav="features">Features</a>
+          <a href="#lp-contact" data-nav="contact">Contact</a>
+        </nav>
+        <button class="reference-recover-overlay" onclick="openRecoveryWorkspace()" aria-label="Recover Now">Recover Now
+          <span>→</span></button>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section class="lp-section lp-about" id="lp-about">
+      <div class="lp-container">
+        <span class="lp-eyebrow">About falconDataRescue</span>
+        <h2 class="lp-h2">Forensic-grade recovery, without the guesswork</h2>
+        <p class="lp-lead">
+          falconDataRescue analyzes damaged, deleted, or partially corrupted storage and reconstructs only what can be
+          validated — preserving the original evidence at every step. No invented bytes, no silent overwrites.
+        </p>
+        <div class="lp-stats">
+          <div class="lp-stat"><strong>1.8M+</strong><span>MFT records scanned per drive</span></div>
+          <div class="lp-stat"><strong>40+</strong><span>File signatures carved</span></div>
+          <div class="lp-stat"><strong>Read-only</strong><span>Source evidence is never modified</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="lp-section lp-features" id="lp-features">
+      <div class="lp-container">
+        <span class="lp-eyebrow">Features</span>
+        <h2 class="lp-h2">Everything you need to recover with confidence</h2>
+        <div class="lp-grid">
+          <article class="lp-card">
+            <div class="lp-card-icon">🛠️</div>
+            <h3>Corrupted File Repair</h3>
+            <p>Rebuild broken headers, trailers, and structure for PDF, JPEG, PNG, DOCX, XLSX, ZIP and more.</p>
+          </article>
+          <article class="lp-card">
+            <div class="lp-card-icon">🗑️</div>
+            <h3>Deleted File Recovery</h3>
+            <p>Scan live NTFS drives at the $MFT level to restore files deleted outside the Recycle Bin.</p>
+          </article>
+          <article class="lp-card">
+            <div class="lp-card-icon">💽</div>
+            <h3>Disk Image Carving</h3>
+            <p>Signature-carve recoverable files from raw forensic images (.dd / .raw / .img / .e01).</p>
+          </article>
+          <article class="lp-card">
+            <div class="lp-card-icon">🧩</div>
+            <h3>Fragment Analysis</h3>
+            <p>Reassemble scattered data runs and visualize how fragments relate to the whole file.</p>
+          </article>
+          <article class="lp-card">
+            <div class="lp-card-icon">⚖️</div>
+            <h3>Integrity Scoring</h3>
+            <p>Every result carries a validation score so you recover only what can be proven intact.</p>
+          </article>
+          <article class="lp-card">
+            <div class="lp-card-icon">🤖</div>
+            <h3>AI-Assisted Review</h3>
+            <p>Summarize extracted text, entities, and evidence to triage results quickly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section class="lp-section lp-contact" id="lp-contact">
+      <div class="lp-container lp-contact-inner">
+        <span class="lp-eyebrow">Get started</span>
+        <h2 class="lp-h2">Ready to recover your data?</h2>
+        <p class="lp-lead">Launch the recovery workspace and start analyzing your files, drives, or disk images.</p>
+        <button class="lp-cta" onclick="openRecoveryWorkspace()">Recover Now <span>→</span></button>
+        <div class="lp-contact-links">
+          <a href="mailto:support@mce-recovery.local">support@mce-recovery.local</a>
+          <span class="lp-dot">•</span>
+          <a href="#landing-page">Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="lp-footer">
+      falconDataRescue Forensic Recovery · Analyze first · Recover only what can be validated
+    </footer>
+
+    <nav class="landing-nav" aria-label="Landing navigation">
+      <a class="landing-brand" href="#landing-page">
+        <span class="landing-brand-icon">⟳</span>
+        <span>Recover</span>
+      </a>
+      <div class="landing-links">
+        <a class="active" href="#landing-page">Home</a>
+        <a href="#landing-features">About</a>
+        <a href="#landing-features">Features</a>
+        <a href="#landing-footer">Contact</a>
+      </div>
+    </nav>
+
+    <div class="landing-hero">
+      <div class="landing-copy">
+        <div class="landing-kicker">SMART FILE RECOVERY</div>
+        <h2>From Damaged<br>to <span>Validated</span></h2>
+        <p>Don’t lose your important files.<br>Analyze, recover, and validate your data—all in one place.</p>
+        <button class="landing-cta" onclick="openRecoveryWorkspace()">
+          Recover Now <span>→</span>
+        </button>
+
+        <div class="landing-features" id="landing-features">
+          <div><span>◇</span><strong>Safe &amp; Secure</strong></div>
+          <div><span>ϟ</span><strong>Evidence Based</strong></div>
+          <div><span>▣</span><strong>All File Types</strong></div>
+          <div><span>▤</span><strong>Fragment Analysis</strong></div>
+        </div>
+      </div>
+
+      <div class="landing-art" aria-label="Damaged files becoming a validated folder">
+        <div class="art-file-chip art-pdf">PDF</div>
+        <div class="art-file-chip art-doc">▤</div>
+        <div class="art-file-chip art-xls">X</div>
+        <div class="art-file-chip art-img">▧</div>
+        <div class="art-file-chip art-code">&lt;/&gt;</div>
+        <div class="art-file-chip art-zip">♫</div>
+        <div class="art-broken-file">
+          <div class="art-page-fold"></div>
+          <span class="art-eye left"></span><span class="art-eye right"></span>
+          <span class="art-mouth">⌁</span>
+        </div>
+        <div class="art-arrow">➜</div>
+        <div class="art-folder">
+          <div class="art-folder-tab"></div>
+          <div class="art-folder-face"><span>⌣</span><b>•</b><i>⌣</i></div>
+        </div>
+        <div class="art-spark spark-one">✦</div>
+        <div class="art-spark spark-two">✧</div>
+      </div>
+    </div>
+
+    <footer class="landing-footer" id="landing-footer">
+      falconDataRescue Forensic Recovery · Analyze first · Recover only what can be validated
+    </footer>
+  </section>
+
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-badge-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 12l10 5 10-5" />
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>falconDataRescue AI Data Recovery Studio</h1>
+        <p>Evidence-safe recovery • Validation • AI-assisted review</p>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <button class="btn btn-secondary btn-sm nav-home-btn" onclick="showLanding()" title="Back to home page">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5 12 3l9 6.5" />
+          <path d="M5 10v10h14V10" />
+        </svg>
+        Home
+      </button>
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span id="backend-status-label">Forensic Engine Active</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workstation -->
+  <main class="main-wrapper">
+
+    <!-- Hero / Headline -->
+    <section class="hero">
+      <div class="hero-badge">FORENSIC RECOVERY WORKSPACE</div>
+      <h2>Recover what can be proven.</h2>
+      <p>
+        Preserve the original evidence, extract recoverable fragments, validate the reconstructed output, and use AI to
+        review the evidence without inventing missing bytes.
+      </p>
+
+      <!-- Recovery Mode Switcher -->
+      <div class="mode-switch-wrapper">
+        <button class="mode-tab-btn active" id="tab-btn-files" onclick="setRecoveryMode('files')">
+          📁 Corrupted Files & Folders
+        </button>
+        <button class="mode-tab-btn" id="tab-btn-disk" onclick="setRecoveryMode('disk')">
+          💽 Deleted Files from Disk Image (.dd / .raw)
+        </button>
+        <button class="mode-tab-btn" id="tab-btn-drive" onclick="setRecoveryMode('drive')">
+          🗑️ Deleted Files from Drive (NTFS)
+        </button>
+      </div>
+
+      <!-- Quick Demo Loader Buttons -->
+      <div class="demo-samples-bar">
+        <span class="demo-label">Start with a sample</span>
+        <button class="demo-pill" onclick="loadDemoSample('java_notes')">📚 Java Notes PDF (Damaged Header &
+          Trailer)</button>
+        <button class="demo-pill" onclick="loadDemoSample('contract')">💼 Legal Contract PDF</button>
+        <button class="demo-pill" onclick="loadDemoSample('photo')">🖼️ Damaged Photo</button>
+        <button class="demo-pill" onclick="loadDemoSample('image_test_pack')">🧪 Image Recovery Test Pack (7)</button>
+      </div>
+    </section>
+
+    <!-- Upload Dropzone (Files or Entire Folders) -->
+    <section class="dropzone-container" id="dropzone">
+      <input type="file" id="file-input" multiple style="display: none;">
+      <input type="file" id="folder-input" webkitdirectory directory multiple style="display: none;">
+      <input type="file" id="disk-input" accept=".dd,.raw,.img,.e01,.vmdk,.bin" style="display: none;">
+
+      <div class="dropzone-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+      </div>
+
+      <div class="dropzone-title" id="dropzone-title-text">Drag & Drop Corrupted Files or Folders Here</div>
+      <div class="dropzone-subtitle" id="dropzone-sub-text">Multi-format recovery for JPEG, PNG, PDF, DOCX, XLSX, ZIP,
+        text, and binary evidence.</div>
+
+      <div class="dropzone-buttons" id="file-drop-buttons">
+        <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          </svg>
+          Select Corrupted Files
+        </button>
+
+        <button class="btn btn-secondary" onclick="document.getElementById('folder-input').click()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+          </svg>
+          Upload Entire Folder
+        </button>
+      </div>
+
+      <div class="dropzone-buttons" id="disk-drop-buttons" style="display: none;">
+        <button class="btn btn-primary" onclick="document.getElementById('disk-input').click()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3" />
+            <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+            <path d="M3 12A9 3 0 0 0 21 12" />
+          </svg>
+          Select Forensic Disk Image (.dd / .raw)
+        </button>
+      </div>
+    </section>
+
+    <!-- Deleted-File Recovery via NTFS Drive Scan -->
+    <section class="card" id="drive-section" style="display: none;">
+      <div class="card-header">
+        <h3 class="card-title">🗑️ Deleted File Recovery — NTFS Drive Scan</h3>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <select id="drive-select" class="btn btn-secondary btn-sm" style="padding: 6px 10px;"></select>
+          <button class="btn btn-primary btn-sm" onclick="scanDriveForDeleted()">Scan Drive for Deleted Files</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="file-list" id="drive-scan-list">
+          <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+            Scans the drive's NTFS metadata ($MFT) for files deleted outside the Recycle Bin and reassembles
+            their data clusters — no Recycle Bin involved. Requires the server to run as Administrator.
+          </div>
+        </div>
+        <div class="action-banner" id="drive-scan-banner" style="display: none;">
+          <div>
+            <div style="font-weight: 600; font-size: 14px; margin-bottom: 2px;">Deleted files recovered from drive
+              metadata</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Download individual files or the complete recovery
+              archive.</div>
+          </div>
+          <button class="btn btn-accent" id="btn-download-deleted-bundle">Download All Recovered (.zip)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagnostics & Ingested Files List -->
+    <section class="workspace-grid" id="workspace-section" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" x2="8" y1="13" y2="13" />
+              <line x1="16" x2="8" y1="17" y2="17" />
+            </svg>
+            Uploaded Files & Intelligent Classification (<span id="total-files-count">0</span>)
+          </h3>
+          <button class="btn btn-secondary btn-sm" onclick="clearUploadQueue()">Clear Queue</button>
+        </div>
+
+        <div class="card-body">
+          <div class="file-list" id="file-queue-list">
+            <!-- Populated dynamically on upload -->
+          </div>
+
+          <!-- Bottom Action Banner -->
+          <div class="action-banner">
+            <div>
+              <div style="font-weight: 600; font-size: 14px; margin-bottom: 2px;">Ready for Deep Fragment Reconstruction
+              </div>
+              <div style="font-size: 12px; color: var(--text-muted);">
+                Pre-analysis has identified fragments, relationships, format issues, and integrity evidence. Recovery
+                will now reconstruct only what can be validated.
+              </div>
+            </div>
+
+            <button class="btn btn-accent" id="btn-start-repair">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Start Recovery Job
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Restored Artifacts & Investigation Center -->
+      <div class="card" id="restored-section" style="display: none;">
+        <div class="card-header">
+          <h3 class="card-title" style="color: var(--emerald);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Forensic Investigation & Restored Payloads
+          </h3>
+          <button class="btn btn-primary btn-sm" id="btn-download-bundle" style="display: none;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download All Restored Files (.zip)
+          </button>
+        </div>
+
+        <div class="card-body">
+          <div class="file-list" id="restored-file-list">
+            <!-- Populated dynamically after recovery execution -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep Forensic Inspector Modal (Tabs: Content, Graph, Integrity, Hex) -->
+    <div class="modal-backdrop" id="inspector-modal" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <h3 id="modal-filename">Document Inspector</h3>
+            <div id="modal-filemeta" style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;"></div>
+          </div>
+          <button class="modal-close-btn" onclick="closeInspectorModal()">&times;</button>
+        </div>
+
+        <!-- Inspector Tab Navigation -->
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" id="mtab-content" onclick="switchModalTab('content')">📄 Extracted Notes
+            & Text</button>
+          <button class="modal-tab-btn" id="mtab-graph" onclick="switchModalTab('graph')">🕸️ Fragment Relationship
+            Graph</button>
+          <button class="modal-tab-btn" id="mtab-integrity" onclick="switchModalTab('integrity')">⚖️ Integrity & Realism
+            Assessment</button>
+          <button class="modal-tab-btn" id="mtab-hex" onclick="switchModalTab('hex')">🔍 Raw Sector Byte Map</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Tab 1: Extracted Notes & Payloads -->
+          <div class="tab-pane active" id="pane-content">
+            <div class="entity-pills-container" id="modal-entities-bar">
+              <!-- Populated with extracted entities / PII -->
+            </div>
+            <div class="content-preview-container">
+              <div class="content-preview-actions">
+                <span style="font-size: 12px; color: var(--text-muted);">Salvaged text streams & code snippets:</span>
+                <div>
+                  <button class="btn btn-secondary btn-xs" onclick="copyExtractedContent()">📋 Copy All Text</button>
+                  <button class="btn btn-primary btn-xs" onclick="downloadExtractedMarkdown()">💾 Download Notes
+                    (.md)</button>
+                </div>
+              </div>
+              <div class="extracted-text-body" id="modal-extracted-text"></div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Fragment Relationship Graph -->
+          <div class="tab-pane" id="pane-graph">
+            <div class="graph-info-banner">
+              <strong>Forensic Relationship Map:</strong> Illustrates topological linkages between root file structure,
+              topic clusters, carved fragment streams, and extracted symbols.
+            </div>
+            <div class="graph-canvas-wrapper">
+              <canvas id="relationship-canvas" width="800" height="420"></canvas>
+            </div>
+          </div>
+
+          <!-- Tab 3: Data Integrity & Realism Assessment -->
+          <div class="tab-pane" id="pane-integrity">
+            <div class="assessment-grid">
+              <div class="assessment-card">
+                <div class="assessment-label">Recovery Feasibility Index</div>
+                <div class="assessment-value" id="modal-feasibility-val">98.6%</div>
+                <div class="damage-bar-track" style="margin-top: 8px;">
+                  <div class="damage-bar-fill" id="modal-feasibility-bar"
+                    style="width: 98.6%; background: var(--emerald);"></div>
+                </div>
+              </div>
+
+              <div class="assessment-card">
+                <div class="assessment-label">Classification & Priority</div>
+                <div class="assessment-value" id="modal-category-val" style="font-size: 15px; margin-top: 4px;">
+                  Technical Notes</div>
+                <div id="modal-priority-badge" style="margin-top: 6px;"></div>
+              </div>
+            </div>
+
+            <div class="report-box" style="margin-top: 16px;">
+              <h4 style="font-size: 13px; color: var(--cyan); margin-bottom: 6px;">Forensic Investigator Assessment:
+              </h4>
+              <p id="modal-realism-text" style="font-size: 13px; line-height: 1.6; color: var(--text-primary);"></p>
+            </div>
+
+            <div class="report-box" style="margin-top: 12px;">
+              <h4 style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">Applied Repair Operations:
+              </h4>
+              <ul id="modal-repair-actions-list"
+                style="padding-left: 18px; font-size: 12px; color: var(--text-muted); line-height: 1.6;"></ul>
+            </div>
+          </div>
+
+          <!-- Tab 4: Raw Hex Sector Map -->
+          <div class="tab-pane" id="pane-hex">
+            <div class="hex-viewer" id="modal-hex-viewer"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeInspectorModal()">Close</button>
+          <button class="btn btn-primary" id="modal-download-repaired-btn">Download Restored File</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="toast-root"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
