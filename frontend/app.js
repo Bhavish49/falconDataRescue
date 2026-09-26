@@ -9,9 +9,13 @@
 // opened through Live Server, a file URL, or the old 8000 page, route API
 // calls explicitly to the active recovery backend on 8010.
 const localHost = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
-const API_BASE_URL = localHost && window.location.port !== '8010'
+// Set window.FALCON_API_BASE_URL before this script for a separately hosted
+// backend. Netlify serves only the static frontend; localhost is used only in
+// local development.
+const configuredApiBase = (window.FALCON_API_BASE_URL || '').replace(/\/$/, '');
+const API_BASE_URL = configuredApiBase || (localHost && window.location.port !== '8010'
   ? 'http://127.0.0.1:8010'
-  : '';
+  : '');
 
 let uploadedFiles = [];
 let analyzedItems = [];

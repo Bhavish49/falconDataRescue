@@ -222,6 +222,26 @@ the web UI or `/api/deleted/scan-drive` for deleted files on a live NTFS drive.
 
 ## Using the web UI
 
+### Netlify deployment
+
+This repository includes `netlify.toml`; Netlify should use `frontend` as the
+publish directory automatically. If configuring the site manually, set:
+
+```text
+Base directory: (leave blank)
+Build command: (leave blank)
+Publish directory: frontend
+```
+
+Netlify hosts the static frontend only. The FastAPI backend must be deployed
+separately, and the frontend API base URL must point to that public backend
+instead of `127.0.0.1:8010`. Before deploying, edit the inline setting in
+`frontend/index.html`, for example:
+
+```html
+<script>window.FALCON_API_BASE_URL = "https://api.example.com";</script>
+```
+
 1. **Landing page** — full-bleed artwork hero with navigation (Home / About / Features /
    Contact) and a **Recover Now** button that opens the workspace.
 2. **Choose a recovery mode:**
